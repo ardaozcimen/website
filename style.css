@@ -1,0 +1,965 @@
+/* ==========================================================================
+   1. TEMEL AYARLAR, RENKLER VE SCROLL AKICILIĞI
+   ========================================================================== */
+:root {
+    --primary-color: #2c3e50;
+    --accent-color: #3498db;
+    --light-bg: #f8f9fa;
+    --dark-text: #333;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    color: var(--dark-text);
+    line-height: 1.6;
+    overflow-x: hidden;
+    background-color: #fcfcfc;
+}
+
+/* ==========================================================================
+   2. STICKY HEADER, İLETİŞİM ALANI VE YENİ RANDEVU BUTONU
+   ========================================================================== */
+.main-header {
+    background: #ffffff;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+    width: 100%;
+}
+
+.header-top {
+    background: var(--primary-color);
+    color: #fff;
+    padding: 8px 20px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    align-items: center;
+}
+
+.header-top-link {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+}
+
+.header-top-link:hover {
+    color: var(--accent-color);
+}
+
+.header-contact {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Telefon Kutucuğu */
+.phone-action-link {
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.15); 
+    padding: 6px 16px; 
+    border-radius: 4px; 
+    border: 1px solid rgba(255, 255, 255, 0.3); 
+    transition: all 0.3s ease;
+}
+
+.phone-action-link:hover {
+    background-color: #ffffff; 
+    color: var(--primary-color) !important; 
+    border-color: #ffffff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2); 
+    transform: translateY(-2px); 
+}
+
+.phone-icon-svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor; 
+    margin-right: 8px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Header İçi Kırmızı Randevu Butonu */
+.btn-header-randevu {
+    display: inline-block;
+    background: #e74c3c;
+    color: #ffffff !important;
+    padding: 6px 16px;
+    font-size: 13px;
+    font-weight: 800;
+    text-decoration: none;
+    border-radius: 4px;
+    text-transform: uppercase;
+    animation: pulseHeaderButton 1.5s infinite;
+    box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.85);
+    transition: all 0.3s ease;
+    border: 1px solid #e74c3c;
+}
+
+.btn-header-randevu:hover {
+    background: #c0392b;
+    border-color: #c0392b;
+    transform: translateY(-2px);
+}
+
+@keyframes pulseHeaderButton {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.7); }
+    70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(231, 76, 60, 0); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(231, 76, 60, 0); }
+}
+
+/* ==========================================================================
+   3. LOGO VE ANA YATAY MENÜ (DROPDOWN)
+   ========================================================================== */
+.header-bottom {
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1300px; 
+    margin: 0 auto;
+}
+
+.logo-link {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.site-logo {
+    max-height: 55px; 
+    width: auto;      
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.logo-link:hover .site-logo { 
+    transform: scale(1.02); 
+}
+
+.desktop-main-nav {
+    background: #f8f9fa;
+    padding: 5px 15px;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+
+.desktop-main-nav > ul {
+    display: flex;
+    list-style: none;
+    gap: 15px; 
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.desktop-main-nav > ul > li > a {
+    text-decoration: none;
+    color: var(--primary-color);
+    font-weight: 700;
+    font-size: 15px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    display: block;
+    transition: 0.3s ease;
+    white-space: nowrap; 
+}
+
+.desktop-main-nav > ul > li > a:hover {
+    background-color: var(--accent-color);
+    color: #ffffff;
+}
+
+/* ==========================================================================
+   4. İÇİÇE AÇILIR (NESTED) MENÜ MİMARİSİ
+   ========================================================================== */
+.desktop-main-nav ul li.dropdown-parent {
+    position: relative;
+}
+
+.dropdown-toggle .arrow {
+    font-size: 12px;
+    margin-left: 5px;
+    display: inline-block;
+}
+
+.dropdown-menu-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #ffffff;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); 
+    border: 1px solid #eef2f5;
+    border-radius: 8px; 
+    width: 290px; 
+    padding: 10px 0 !important;
+    margin-top: 5px; 
+    list-style: none;
+    flex-direction: column;
+    z-index: 99999;
+    display: flex;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(10px); 
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0.4s; 
+}
+
+.dropdown-menu-list li {
+    width: 100%;
+}
+
+.dropdown-menu-list li a {
+    color: var(--primary-color) !important;
+    font-weight: 700 !important; 
+    font-size: 15px !important;
+    padding: 14px 22px !important; 
+    border-radius: 0 !important;
+    display: block;
+    text-align: left;
+    background: none !important;
+    text-decoration: none;
+    border-bottom: 1px solid #f8f9fa; 
+    transition: all 0.2s ease !important;
+}
+
+.dropdown-menu-list li a:hover {
+    background-color: #f0f7fc !important;
+    color: var(--accent-color) !important;
+    padding-left: 28px !important;
+}
+
+.dropdown-parent:hover .dropdown-menu-list {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0s;
+}
+
+.dropdown-submenu {
+    position: relative; 
+}
+
+.dropdown-submenu .right-arrow {
+    float: right;
+    font-size: 18px;
+    line-height: 1;
+    color: #e67e22; 
+    transition: 0.2s;
+}
+
+.dropdown-submenu-list {
+    position: absolute;
+    top: -10px; 
+    left: 100%; 
+    background: #ffffff;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    border: 1px solid #eef2f5;
+    border-radius: 8px;
+    width: 320px; 
+    padding: 10px 0 !important;
+    margin: 0;
+    margin-left: 2px;
+    list-style: none;
+    flex-direction: column;
+    z-index: 999999;
+    display: flex;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateX(10px); 
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0.4s; 
+}
+
+.dropdown-submenu-list li a {
+    color: var(--primary-color) !important; 
+    font-weight: 600 !important; 
+    font-size: 14px !important;
+    padding: 12px 22px !important;
+    border-bottom: 1px solid #f4f6f9;
+}
+
+.dropdown-submenu-list li a:hover {
+    color: var(--accent-color) !important;
+    background-color: #fcfcfc !important;
+    padding-left: 28px !important;
+}
+
+.dropdown-submenu:hover .dropdown-submenu-list {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0s;
+}
+
+/* ==========================================================================
+   5. BURGER MENÜ VE SAĞ SOSYAL MEDYA İKONLARI
+   ========================================================================== */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px; 
+}
+
+.social-icons-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-left: 2px solid #eaeaea; 
+    padding-left: 18px;
+}
+
+.social-icons-right a {
+    color: var(--primary-color); 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+}
+
+.social-icons-right a:hover {
+    color: var(--accent-color); 
+    transform: scale(1.15) translateY(-2px); 
+}
+
+.burger-menu {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 20px;
+}
+
+.burger-menu span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background: var(--primary-color);
+    transition: 0.3s;
+}
+
+/* ==========================================================================
+   6. MOBİL YAN MENÜ (SIDEBAR) - PREMIUM TASARIM
+   ========================================================================== */
+.sidebar-menu {
+    position: fixed;
+    top: 0;
+    left: -350px; 
+    width: 350px;
+    height: 100%;
+    background: #ffffff;
+    box-shadow: 5px 0 30px rgba(0,0,0,0.2);
+    z-index: 10000;
+    transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); 
+    overflow-y: auto;
+    padding: 0; 
+}
+
+.sidebar-menu.active { left: 0; }
+
+.sidebar-menu::-webkit-scrollbar { width: 6px; }
+.sidebar-menu::-webkit-scrollbar-track { background: #f8f9fa; }
+.sidebar-menu::-webkit-scrollbar-thumb { background: var(--accent-color); border-radius: 10px; }
+.sidebar-menu::-webkit-scrollbar-thumb:hover { background: var(--primary-color); }
+
+.sidebar-overlay {
+    position: fixed;
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%;
+    background: rgba(15, 23, 42, 0.5); 
+    backdrop-filter: blur(4px); 
+    z-index: 9999;
+    opacity: 0; 
+    visibility: hidden; 
+    transition: 0.4s ease;
+}
+
+.sidebar-overlay.active { opacity: 1; visibility: visible; }
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--primary-color);
+    color: #ffffff;
+    padding: 20px 25px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.sidebar-header h3 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.close-btn { 
+    font-size: 36px; 
+    color: #ffffff; 
+    background: none; 
+    border: none; 
+    cursor: pointer; 
+    line-height: 1; 
+    transition: transform 0.3s ease, color 0.3s ease; 
+}
+
+.close-btn:hover { 
+    color: #e74c3c; 
+    transform: rotate(90deg); 
+}
+
+.menu-list { 
+    list-style: none; 
+    padding: 15px 0 30px 0; 
+    margin: 0; 
+}
+
+.menu-list li a { 
+    display: block; 
+    padding: 12px 25px; 
+    color: #333333; 
+    text-decoration: none; 
+    border-bottom: 1px solid #f1f5f9; 
+    font-weight: 600;
+    font-size: 15px;
+    transition: all 0.3s ease;
+}
+
+.menu-list li a:hover { 
+    background-color: #f8fafc; 
+    color: var(--accent-color); 
+    padding-left: 32px; 
+    border-left: 4px solid var(--accent-color); 
+}
+
+.menu-title { 
+    font-weight: 800; 
+    color: var(--primary-color); 
+    background: #f1f5f9; 
+    padding: 14px 25px; 
+    margin-top: 15px; 
+    font-size: 16px; 
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-left: 4px solid var(--primary-color);
+}
+
+.sub-menu-title { 
+    padding: 12px 25px; 
+    font-weight: 700; 
+    color: var(--accent-color); 
+    font-size: 14px; 
+    background: #ffffff;
+    border-bottom: 2px dashed #eaeaea;
+    margin-top: 5px;
+}
+
+/* ==========================================================================
+   7. HERO ALANI, SLIDER VE GLASSMORPHISM (BUZLU CAM) EFEKTİ
+   ========================================================================== */
+.hero {
+    position: relative; 
+    padding: 100px 8%; 
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: flex-start; 
+    align-items: center;
+    min-height: 550px;
+    overflow: hidden; 
+}
+
+.hero-slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; 
+}
+
+.hero-slider::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(255,255,255,0.20), rgba(53, 109, 148, 0.35));
+    z-index: 2; 
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0; 
+    transition: opacity 0.8s ease-in-out; 
+    z-index: 1;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+.hero-content { 
+    position: relative;
+    z-index: 3; 
+    max-width: 550px; 
+    background: rgba(255, 255, 255, 0.35); 
+    padding: 35px 30px; 
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
+    backdrop-filter: blur(6px); 
+    margin-right: auto; 
+}
+
+.hero-content h2 { color: var(--accent-color); font-size: 30px; font-weight: 900; text-shadow: 0px 2px 4px rgba(0,0,0,0.1); margin-bottom: 5px; }
+.hero-content h3 { font-size: 38px; margin-bottom: 20px; color: var(--primary-color); font-weight: 900; text-shadow: 0px 2px 4px rgba(0,0,0,0.1); line-height: 1.2; }
+.hero-content p { font-size: 17px; font-weight: 700; color: #1a1a1a; line-height: 1.7; }
+
+/* ==========================================================================
+   8. GENEL KUTULAR, GALERİ VE GRİDLER
+   ========================================================================== */
+.btn-primary { display: inline-block; background: var(--accent-color); color: #fff; padding: 12px 25px; text-decoration: none; border-radius: 4px; border: none; cursor: pointer; font-weight: bold; }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+.section-padding { padding: 60px 0; }
+.bg-white { background: #fff; }
+.bg-light { background: var(--light-bg); }
+.section-title { text-align: center; margin-bottom: 30px; font-size: 28px; color: var(--primary-color); }
+.section-subtitle { text-align: center; max-width: 800px; margin: 0 auto 40px auto; color: #555; }
+
+.grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+.card { background: var(--light-bg); padding: 20px; border-radius: 6px; transition: 0.3s; }
+.card:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+.card h3 { margin-bottom: 10px; color: var(--primary-color); font-size: 18px; }
+.card.border-top { border-top: 4px solid var(--accent-color); background: #fff; }
+
+.team-grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.team-card { background: var(--light-bg); text-align: center; padding: 20px; border-radius: 6px; border: 1px solid #e0e0e0; }
+
+.gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+.gallery-item { width: 100%; height: 250px; border-radius: 8px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); background: #eee; }
+.gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+.gallery-item:hover img { transform: scale(1.08); }
+
+/* ==========================================================================
+   9. İÇERİK DETAY SAYFALARI VE BLOG KARTLARI (VE SLIDER)
+   ========================================================================== */
+.page-banner {
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    color: #fff;
+    padding: 50px 0;
+    text-align: center;
+}
+.page-banner h1 { font-size: 32px; margin-bottom: 10px; }
+.breadcrumb { list-style: none; display: flex; justify-content: center; gap: 10px; font-size: 14px; }
+.breadcrumb a { color: #e0e0e0; text-decoration: none; }
+.breadcrumb a:hover { color: #fff; }
+
+.single-page-content { max-width: 800px; margin: 0 auto; }
+.content-box { background: #fff; padding: 40px; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+.content-box h2 { color: var(--primary-color); margin-bottom: 20px; border-bottom: 2px solid var(--light-bg); padding-bottom: 10px; }
+.lead-text { font-size: 18px; color: #444; line-height: 1.8; }
+
+/* -- BLOG SLIDER CONTAINER YAPISI -- */
+.blog-slider-container {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 10px 40px; 
+}
+.blog-wrapper {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none; 
+}
+.blog-wrapper::-webkit-scrollbar {
+    display: none; 
+}
+
+.blog-card-new {
+    flex: 0 0 calc(100% / 3 - 14px); 
+    background: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #eef2f5;
+    transition: 0.3s ease;
+    scroll-snap-align: center;
+}
+
+.blog-card-new:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+.blog-card-img-box { width: 100%; height: 200px; overflow: hidden; background: #eee; }
+.blog-card-img-box img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s ease; }
+.blog-card-new:hover .blog-card-img-box img { transform: scale(1.05); }
+
+.blog-card-body { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
+.blog-card-body h3 { font-size: 19px; color: var(--primary-color); margin-bottom: 10px; line-height: 1.4; }
+.blog-card-body p { color: #666; font-size: 14px; line-height: 1.5; margin-bottom: 20px; }
+.blog-card-footer { margin-top: auto; }
+.btn-readmore { color: var(--accent-color); text-decoration: none; font-weight: 700; font-size: 14px; transition: 0.2s; }
+.btn-readmore:hover { color: var(--primary-color); padding-left: 5px; }
+
+.single-blog-wrapper { max-width: 900px; margin: 0 auto; }
+.blog-detailed-box { background: #fff; border-radius: 12px; box-shadow: 0 4px 25px rgba(0,0,0,0.04); overflow: hidden; }
+.blog-main-image-area { width: 100%; max-height: 450px; overflow: hidden; }
+.blog-main-image-area img { width: 100%; height: 100%; object-fit: cover; }
+.blog-detailed-body { padding: 40px; }
+.blog-meta-info { margin-bottom: 15px; }
+.blog-date { font-size: 13px; color: #999; font-weight: 600; }
+.blog-inner-title { font-size: 28px; color: var(--primary-color); margin-bottom: 25px; line-height: 1.3; }
+.blog-main-text { font-size: 17px; color: #333; line-height: 1.8; }
+
+/* ==========================================================================
+   10. FOOTER VE MOBİL GEÇİŞ KURALLARI
+   ========================================================================== */
+.main-footer-area { background: var(--primary-color); color: #fff; padding: 40px 0 20px 0; margin-top: 40px; }
+.footer-grid { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 30px; }
+.footer-nav ul { list-style: none; }
+.footer-nav ul li a { color: #ccc; text-decoration: none; line-height: 2; }
+.footer-bottom { text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #444; font-size: 14px; }
+
+@media (max-width: 992px) {
+    .desktop-main-nav { display: none; }
+    .header-bottom { display: flex; justify-content: space-between; align-items: center; }
+    .blog-card-new { flex: 0 0 calc(100% / 2 - 10px); }
+}
+
+@media (max-width: 768px) {
+    .blog-slider-container { padding: 10px 30px; }
+    .blog-card-new { flex: 0 0 100%; }
+    .testimonial-slider-container { padding: 20px 30px; }
+    .testimonial-card { flex: 0 0 100%; } 
+}
+
+/* Kart Başlıklarındaki Linklerin Kesin Görünüm Ayarı (Zırhlı) */
+div.card h3 a, 
+div.card h3 a:link, 
+div.card h3 a:visited, 
+div.card h3 a:active {
+    text-decoration: none !important; 
+    color: var(--primary-color) !important; 
+    transition: all 0.3s ease !important; 
+    display: inline-block !important; 
+}
+
+/* Üzerine Gelindiğinde (Hover) Oluşacak Şık Efekt */
+div.card h3 a:hover {
+    color: var(--accent-color) !important; 
+    transform: translateX(5px) !important; 
+}
+
+/* ==========================================================================
+   11. İLETİŞİM SAYFASI (CONTACT PAGE) ÖZEL TASARIMI
+   ========================================================================== */
+.contact-page-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.contact-map-box {
+    flex: 1 1 500px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.contact-info-box {
+    flex: 1 1 400px;
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.contact-info-box h3 {
+    color: var(--primary-color);
+    margin-bottom: 30px;
+    font-size: 24px;
+    border-bottom: 2px solid var(--light-bg);
+    padding-bottom: 10px;
+}
+
+.contact-detail-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 25px;
+    gap: 15px;
+}
+
+.contact-detail-item .icon {
+    font-size: 26px;
+    margin-top: 2px;
+}
+
+.contact-detail-item .text h4 {
+    margin-bottom: 5px;
+    color: var(--primary-color);
+    font-size: 16px;
+}
+
+.contact-detail-item .text p, 
+.contact-detail-item .text a {
+    color: #555;
+    text-decoration: none;
+    font-size: 16px;
+    line-height: 1.5;
+    transition: color 0.3s ease;
+}
+
+.contact-detail-item .text a:hover {
+    color: var(--accent-color);
+}
+
+/* Hero Alanı Buton Taşıyıcısı (Yan Yana Dizilim İçin) */
+.hero-buttons {
+    display: flex;
+    gap: 15px; 
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+/* Ana Sayfa Hero Alanına Özel Büyük Kırmızı Randevu Butonu */
+.btn-hero-randevu {
+    display: inline-block;
+    background: #e74c3c;
+    color: #ffffff !important;
+    padding: 12px 25px; 
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 4px;
+    text-transform: uppercase;
+    animation: pulseHeaderButton 1.5s infinite; 
+    box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.85);
+    transition: all 0.3s ease;
+    border: 1px solid #e74c3c;
+    cursor: pointer;
+}
+
+.btn-hero-randevu:hover {
+    background: #c0392b;
+    border-color: #c0392b;
+    transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   12. YENİ EKLENEN İSTATİSTİKLER (COUNTER) BÖLÜMÜ
+   ========================================================================== */
+.counter-grid {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 30px;
+    text-align: center;
+}
+.counter-box {
+    flex: 1 1 200px;
+    padding: 20px;
+}
+.counter-number {
+    font-size: 48px;
+    font-weight: 900;
+    display: inline-block;
+    color: var(--accent-color);
+}
+.counter-box span {
+    font-size: 48px;
+    font-weight: 900;
+    color: var(--accent-color);
+}
+.counter-text {
+    font-size: 18px;
+    font-weight: 700;
+    margin-top: 10px;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ==========================================================================
+   13. YENİ EKLENEN BAŞARI HİKAYELERİ (SLIDER) BÖLÜMÜ
+   ========================================================================== */
+.testimonial-slider-container {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 20px 40px;
+}
+.testimonial-wrapper {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none; 
+}
+.testimonial-wrapper::-webkit-scrollbar {
+    display: none; 
+}
+.testimonial-card {
+    flex: 0 0 calc(100% / 3 - 20px);
+    background: var(--light-bg);
+    padding: 30px 20px;
+    border-radius: 12px;
+    text-align: center;
+    scroll-snap-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    border: 1px solid #eef2f5;
+}
+.testimonial-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 3px solid var(--accent-color);
+}
+.testimonial-text {
+    font-style: italic;
+    color: #555;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+.testimonial-name {
+    color: var(--primary-color);
+    font-weight: 800;
+}
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    font-size: 18px;
+    transition: 0.3s;
+}
+.slider-btn:hover { background: var(--accent-color); }
+.prev-btn { left: 0; }
+.next-btn { right: 0; }
+
+/* ==========================================================================
+   14. YENİ EKLENEN SIKÇA SORULAN SORULAR (FAQ) BÖLÜMÜ
+   ========================================================================== */
+.faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+.faq-item {
+    background: #fff;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    overflow: hidden;
+    border: 1px solid #eee;
+}
+.faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 20px;
+    text-align: left;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--primary-color);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.3s;
+}
+.faq-question:hover { color: var(--accent-color); }
+.faq-icon {
+    font-size: 24px;
+    font-weight: 400;
+    transition: transform 0.3s ease;
+}
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out;
+    background: #fdfdfd;
+}
+.faq-answer p {
+    padding: 0 20px 20px 20px;
+    color: #555;
+    line-height: 1.6;
+}
+.faq-item.active .faq-icon {
+    transform: rotate(45deg);
+    color: var(--accent-color);
+}
+.faq-item.active .faq-answer {
+    max-height: 500px; 
+}
+
+/* ==========================================================================
+   15. YÜZEN WHATSAPP BUTONU
+   ========================================================================== */
+.floating-whatsapp {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #25d366;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    z-index: 999999;
+    transition: transform 0.3s ease;
+    animation: bounceWa 2s infinite;
+}
+.floating-whatsapp:hover {
+    transform: scale(1.1);
+    background-color: #1ebe57;
+}
+@keyframes bounceWa {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
+}
