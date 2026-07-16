@@ -9,15 +9,15 @@
         <div class="footer-nav">
             <h4>Hızlı Menü</h4>
             <ul>
-                <li><a href="index.php">Anasayfa</a></li>
-                <li><a href="hakkimizda.php">Hakkımızda</a></li>
-                <li><a href="index.php#galeri">Galeri</a></li>
-                <li><a href="iletisim.php">İletişim</a></li>
+                <li><a href="<?= BASE_URL ?>">Anasayfa</a></li>
+                <li><a href="<?= BASE_URL ?>hakkimizda.php">Hakkımızda</a></li>
+                <li><a href="<?= BASE_URL ?>#galeri">Galeri</a></li>
+                <li><a href="<?= BASE_URL ?>iletisim.php">İletişim</a></li>
             </ul>
         </div>
     </div>
     <div class="footer-bottom">
-        <p>&copy; 2026 Necati Özçimen - Novafertil Konya Tüp Bebek Merkezi Tüm Hakları Saklıdır - Designed By OAÖ</p>
+        <p>&copy; 2026 Necati Özçimen - Novafertil Konya Tüp Bebek Merkezi Tüm Hakları Saklıdır - Designed By <a href="https://www.instagram.com/ozcimenonurarda/" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">OAÖ</a></p>
     </div>
 </footer>
 
@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
     // ==========================================
-    // 3. BAŞARI HİKAYELERİ (SLIDER) - OTOMATİK & DÖNGÜLÜ
+    // 3. İSTATİSTİKLER VEYA GÖRÜNÜM SLIDER - OTOMATİK & DÖNGÜLÜ
     // ==========================================
     const testWrapper = document.getElementById('testimonialWrapper');
     if(testWrapper) {

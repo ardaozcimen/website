@@ -1,18 +1,73 @@
+<?php require_once dirname(__FILE__) . '/../db.php'; ?>
 <!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo isset($seo_title) ? htmlspecialchars($seo_title) : 'Op. Dr. Necati Özçimen - Konya Tüp Bebek Merkezi'; ?></title>
-    <meta name="description" content="<?php echo isset($seo_desc) ? htmlspecialchars($seo_desc) : 'Konya Novafertil Tüp Bebek Merkezi uzmanlarından Op. Dr. Necati Özçimen klinik web sitesi.'; ?>">
-    <link rel="stylesheet" href="style.css?v=2">
+    <title><?php echo !empty($seo_title) ? htmlspecialchars($seo_title) : 'Op. Dr. Necati Özçimen - Konya Tüp Bebek Merkezi'; ?></title>
+    <meta name="description" content="<?php echo !empty($seo_desc) ? htmlspecialchars($seo_desc) : 'Konya Novafertil Tüp Bebek Merkezi uzmanlarından Op. Dr. Necati Özçimen klinik web sitesi.'; ?>">
+    
+    <!-- Open Graph (Sosyal Medya Paylaşım) Etiketleri -->
+    <meta property="og:title" content="<?php echo !empty($seo_title) ? htmlspecialchars($seo_title) : 'Op. Dr. Necati Özçimen - Konya Tüp Bebek Merkezi'; ?>">
+    <meta property="og:description" content="<?php echo !empty($seo_desc) ? htmlspecialchars($seo_desc) : 'Konya Novafertil Tüp Bebek Merkezi uzmanlarından Op. Dr. Necati Özçimen klinik web sitesi.'; ?>">
+    <meta property="og:image" content="<?= 'https://www.konyatupbebek.com' . BASE_URL . 'uploads/dr_necati_ozcimen_tup_bebek.webp' ?>">
+    <meta property="og:url" content="<?= 'https://www.konyatupbebek.com' . $_SERVER['REQUEST_URI'] ?>">
+    <meta property="og:type" content="website">
+
+    <!-- Google Search Console Doğrulama Etiketi (Kullanıcı Tarafından HTML Dosyası İle Doğrulandı) -->
+
+    <link rel="stylesheet" href="<?= BASE_URL ?>style.css?v=2">
+    <!-- Schema.org MedicalClinic -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "MedicalClinic",
+      "name": "Op. Dr. Necati Özçimen - Konya Tüp Bebek Merkezi",
+      "image": "<?= BASE_URL ?>uploads/dr_necati_ozcimen_tup_bebek.webp",
+      "@id": "<?= BASE_URL ?>",
+      "url": "<?= BASE_URL ?>",
+      "telephone": "+903323235151",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Ateşbaz-ı Veli Mh. Yeni Meram Cd. No:75",
+        "addressLocality": "Meram",
+        "addressRegion": "Konya",
+        "addressCountry": "TR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 37.8628,
+        "longitude": 32.4493
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ],
+        "opens": "09:00",
+        "closes": "17:00"
+      },
+      "medicalSpecialty": ["Gynecologic", "Reproductive"],
+      "founder": {
+        "@type": "Physician",
+        "name": "Op. Dr. Necati Özçimen",
+        "url": "<?= BASE_URL ?>hakkimizda.php"
+      }
+    }
+    </script>
 </head>
 <body>
 
 <header class="main-header">
     <div class="header-top">
         <div class="hashtag">
-            <a href="index.php" class="header-top-link">#HayaliniHisset</a>
+            <a href="<?= BASE_URL ?>" class="header-top-link">#HayaliniHisset</a>
         </div>
         <div class="header-contact">
             <a href="tel:+903323235151" onclick="if(!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){ window.open('https://api.whatsapp.com/send?phone=905063701222', '_blank'); return false; }" class="header-top-link phone-action-link">
@@ -30,70 +85,75 @@
     
     <div class="header-bottom">
         <div class="logo-area">
-            <a href="index.php" class="logo-link">
-                <img src="uploads/dr_necati_ozcimen_tup_bebek.webp" alt="Op. Dr. Necati Özçimen - Konya Tüp Bebek Merkezi" class="site-logo">            
+            <a href="<?= BASE_URL ?>" class="logo-link">
+                <img src="<?= BASE_URL ?>uploads/dr_necati_ozcimen_tup_bebek.webp" alt="Op. Dr. Necati Özçimen - Konya Tüp Bebek Merkezi" class="site-logo">            
             </a>
         </div>
 
         <nav class="desktop-main-nav">
             <ul>
-                <li><a href="index.php">Anasayfa</a></li>
-                <li><a href="hakkimizda.php">Hakkımızda</a></li>
-                
+                <li><a href="<?= BASE_URL ?>">Anasayfa</a></li>
                 <li class="dropdown-parent">
-                    <a href="index.php#kisirlik-nedenleri" class="dropdown-toggle">Kısırlık Nedenleri <span class="arrow">▾</span></a>
+                    <a href="#" class="dropdown-toggle">Hakkımızda <span class="arrow">▾</span></a>
+                    <ul class="dropdown-menu-list">
+                        <li><a href="<?= BASE_URL ?>hakkimizda.php">Doktor Özgeçmişi</a></li>
+                        <li><a href="<?= BASE_URL ?>blog.php">Blog Yazıları</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown-parent">
+                    <a href="<?= BASE_URL ?>#kisirlik-nedenleri" class="dropdown-toggle">Kısırlık Nedenleri <span class="arrow">▾</span></a>
                     <ul class="dropdown-menu-list">
                         <li class="dropdown-submenu">
                             <a href="#">Kadına Bağlı Kısırlık <span class="right-arrow">›</span></a>
                             <ul class="dropdown-submenu-list">
-                                <li><a href="detay.php?sayfa=endometriozis">Endometriozis</a></li>
-                                <li><a href="detay.php?sayfa=vajinismus">Vajinismus</a></li>
-                                <li><a href="detay.php?sayfa=erken-menopoz">Erken Menopoz</a></li>
-                                <li><a href="detay.php?sayfa=amh">Yumurta Rezerv Düşüklüğü (Amh)</a></li>
-                                <li><a href="detay.php?sayfa=tubal-faktor">Tubal Faktör</a></li>
-                                <li><a href="detay.php?sayfa=cift-rahim">Çift Rahim Nedir, Tedavisi Nasıldır?</a></li>
-                                <li><a href="detay.php?sayfa=septum">Septum</a></li>
-                                <li><a href="detay.php?sayfa=pcos">Polikistik Over PCOS</a></li>
-                                <li><a href="detay.php?sayfa=aciklanamayan-kisirlik">Açıklanamayan Kısırlık</a></li>
+                                <li><a href="<?= BASE_URL ?>detay.php?sayfa=endometriozis">Endometriozis</a></li>
+                                <li><a href="<?= BASE_URL ?>detay.php?sayfa=vajinismus">Vajinismus</a></li>
+                                <li><a href="<?= BASE_URL ?>detay.php?sayfa=erken-menopoz">Erken Menopoz</a></li>
+                                <li><a href="<?= BASE_URL ?>detay.php?sayfa=amh">Yumurta Rezerv Düşüklüğü (Amh)</a></li>
+                                <li><a href="<?= BASE_URL ?>detay.php?sayfa=tubal-faktor">Tubal Faktör</a></li>
+                                <li><a href="<?= BASE_URL ?>detay.php?sayfa=cift-rahim">Çift Rahim Nedir, Tedavisi Nasıldır?</a></li>
+                                <li><a href="<?= BASE_URL ?>detay.php?sayfa=septum">Septum</a></li>
+                                <li><a href="<?= BASE_URL ?>detay.php?sayfa=pcos">Polikistik Over PCOS</a></li>
+                                <li><a href="<?= BASE_URL ?>detay.php?sayfa=aciklanamayan-kisirlik">Açıklanamayan Kısırlık</a></li>
                             </ul>
                         </li>
                         <li class="dropdown-submenu">
                             <a href="#">Erkeğe Bağlı Kısırlık <span class="right-arrow">›</span></a>
                             <ul class="dropdown-submenu-list">
-                                <li><a href="detay.php?sayfa=hormonal-bozukluklar">Hormonal Bozukluklar</a></li>
-                                <li><a href="detay.php?sayfa=azospermi">Azospermi</a></li>
-                                <li><a href="detay.php?sayfa=klinefelter">Klinefelter Sendromu</a></li>
-                                <li><a href="detay.php?sayfa=sperm-dusuklugu">Sperm Sayısı Düşüklüğü</a></li>
-                                <li><a href="detay.php?sayfa=varikosel">Varikosel</a></li>
+                                <li><a href="<?= BASE_URL ?>detay.php?sayfa=hormonal-bozukluklar">Hormonal Bozukluklar</a></li>
+                                <li><a href="<?= BASE_URL ?>detay.php?sayfa=azospermi">Azospermi</a></li>
+                                <li><a href="<?= BASE_URL ?>detay.php?sayfa=klinefelter">Klinefelter Sendromu</a></li>
+                                <li><a href="<?= BASE_URL ?>detay.php?sayfa=sperm-dusuklugu">Sperm Sayısı Düşüklüğü</a></li>
+                                <li><a href="<?= BASE_URL ?>detay.php?sayfa=varikosel">Varikosel</a></li>
                             </ul>
                         </li>
                     </ul>
                 </li>
                 
                 <li class="dropdown-parent">
-                    <a href="index.php#tedaviler" class="dropdown-toggle">Tedaviler <span class="arrow">▾</span></a>
+                    <a href="<?= BASE_URL ?>#tedaviler" class="dropdown-toggle">Tedaviler <span class="arrow">▾</span></a>
                     <ul class="dropdown-menu-list">
-                        <li><a href="detay.php?sayfa=tup-bebek">Tüp Bebek Tedavisi</a></li>
-                        <li><a href="detay.php?sayfa=asilama">Aşılama (İnseminasyon)</a></li>
-                        <li><a href="detay.php?sayfa=embriyo-dondurma">Embriyo Dondurma</a></li>
-                        <li><a href="detay.php?sayfa=genetik-tup-bebek">Genetik Tüp Bebek</a></li>
-                        <li><a href="detay.php?sayfa=mikro-enjeksiyon">Micro Enjeksiyon (ICSI)</a></li>
-                        <li><a href="detay.php?sayfa=rahim-dinlendirme">Rahim Dinlendirme</a></li>
-                        <li><a href="detay.php?sayfa=sperm-dondurma">Sperm Dondurma</a></li>
-                        <li><a href="detay.php?sayfa=yumurta-dondurma">Yumurta Dondurma</a></li>
+                        <li><a href="<?= BASE_URL ?>detay.php?sayfa=tup-bebek">Tüp Bebek Tedavisi</a></li>
+                        <li><a href="<?= BASE_URL ?>detay.php?sayfa=asilama">Aşılama (İnseminasyon)</a></li>
+                        <li><a href="<?= BASE_URL ?>detay.php?sayfa=embriyo-dondurma">Embriyo Dondurma</a></li>
+                        <li><a href="<?= BASE_URL ?>detay.php?sayfa=genetik-tup-bebek">NGS/Genetik Tüp Bebek</a></li>
+                        <li><a href="<?= BASE_URL ?>detay.php?sayfa=mikro-enjeksiyon">Micro Enjeksiyon (ICSI)</a></li>
+                        <li><a href="<?= BASE_URL ?>detay.php?sayfa=rahim-dinlendirme">Rahim Dinlendirme</a></li>
+                        <li><a href="<?= BASE_URL ?>detay.php?sayfa=sperm-dondurma">Sperm Dondurma</a></li>
+                        <li><a href="<?= BASE_URL ?>detay.php?sayfa=yumurta-dondurma">Yumurta Dondurma</a></li>
                     </ul>
                 </li>
                 
                 <li class="dropdown-parent">
                     <a href="#" class="dropdown-toggle">Tüp Bebek Merkezi <span class="arrow">▾</span></a>
                     <ul class="dropdown-menu-list">
-                        <li><a href="detay.php?sayfa=tup-bebek">Tüp Bebek Süreci</a></li>
-                        <li><a href="bebeklerimiz.php">Bebeklerimiz</a></li>
-                        <li><a href="index.php#basari-hikayeleri">Başarı Hikayeleri / Yorumlar</a></li>
-                        <li><a href="index.php#sss">Sıkça Sorulan Sorular</a></li>
+                        <li><a href="<?= BASE_URL ?>detay.php?sayfa=tup-bebek">Tüp Bebek Süreci</a></li>
+                        <li><a href="<?= BASE_URL ?>bebeklerimiz.php">Bebeklerimiz</a></li>
+                        <li><a href="<?= BASE_URL ?>tup-bebek-tedavi-asamalari.php">Tüp Bebek Tedavi Aşamaları</a></li>
+                        <li><a href="<?= BASE_URL ?>sss.php">Sıkça Sorulan Sorular</a></li>
                     </ul>
                 </li>
-                <li><a href="iletisim.php">İletişim</a></li>
+                <li><a href="<?= BASE_URL ?>iletisim.php">İletişim</a></li>
             </ul>
         </nav>
         

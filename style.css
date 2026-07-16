@@ -339,7 +339,7 @@ body {
     background: none;
     border: none;
     cursor: pointer;
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: space-between;
     width: 30px;
@@ -653,6 +653,8 @@ body {
     .desktop-main-nav { display: none; }
     .header-bottom { display: flex; justify-content: space-between; align-items: center; }
     .blog-card-new { flex: 0 0 calc(100% / 2 - 10px); }
+    .burger-menu { display: flex; }
+    .hashtag { display: none; }
 }
 
 @media (max-width: 768px) {

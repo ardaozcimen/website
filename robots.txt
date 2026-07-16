@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /api/
+Disallow: /db/
+Disallow: /includes/
+
+Sitemap: https://konyatupbebek.com/sitemap.xml

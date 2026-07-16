@@ -11,7 +11,7 @@ include 'includes/sidebar.php';
     <div class="container">
         <h1>İletişim</h1>
         <ul class="breadcrumb">
-            <li><a href="index.php">Anasayfa</a></li>
+            <li><a href="<?= BASE_URL ?>">Anasayfa</a></li>
             <li>/</li>
             <li>İletişim</li>
         </ul>

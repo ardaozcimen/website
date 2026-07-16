@@ -12,7 +12,7 @@ include 'includes/sidebar.php';
     <div class="container">
         <h1>Hakkımızda</h1>
         <ul class="breadcrumb">
-            <li><a href="index.php">Anasayfa</a></li>
+            <li><a href="<?= BASE_URL ?>">Anasayfa</a></li>
             <li>/</li>
             <li>Hakkımızda</li>
         </ul>
@@ -85,7 +85,7 @@ include 'includes/sidebar.php';
                 <div style="background: #ffffff; padding: 25px; border-left: 5px solid var(--accent-color); border-radius: 8px; margin-top: 30px; box-shadow: 0 5px 20px rgba(0,0,0,0.06);">
                     <h3 style="color: var(--primary-color); font-size: 20px; margin-bottom: 15px; margin-top: 0;">Neden Novafertil Tüp Bebek Merkezi?</h3>
                     <ul style="list-style-type: none; padding: 0; color: #222; font-size: 17px; font-weight: 600; line-height: 1.8; margin-bottom: 0;">
-                        <li>✔️ Yüksek Gebelik ve Başarı Oranları</li>
+                        <li>✔️ Modern ve Kanıta Dayalı Tedavi Yöntemleri</li>
                         <li>✔️ Kişiye Özel Tedavi (Bireyselleştirilmiş IVF) Protokolleri</li>
                         <li>✔️ Üst Düzey Donanımlı İleri Teknoloji Laboratuvar Altyapısı</li>
                         <li>✔️ Psikolojik Desteği Önemseyen Şefkatli Süreç Yönetimi</li>
@@ -97,8 +97,8 @@ include 'includes/sidebar.php';
         <!-- Geniş Çağrı Alanı -->
         <div class="appointment-callout" style="margin-top: 60px; text-align: center; padding: 40px; border-radius: 12px; background: #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
             <h3 style="margin-bottom: 15px; font-size: 26px;">Ailemize Katılın, Hayalinizi Hissedin</h3>
-            <p style="font-size: 18px; color: #555; max-width: 800px; margin: 0 auto 25px auto; line-height: 1.6;">Tüp bebek tedavisinde yüksek başarı oranlarımız ve uzman kadromuzla tanışmak, süreç hakkında detaylı ön bilgi almak için bizimle iletişime geçmekten çekinmeyin.</p>
-            <a href="iletisim.php" class="btn-primary" style="font-size: 16px; padding: 15px 35px;">Hemen İletişime Geçin</a>
+            <p style="font-size: 18px; color: #555; max-width: 800px; margin: 0 auto 25px auto; line-height: 1.6;">Tüp bebek tedavisinde deneyimli kadromuzla tanışmak, süreç hakkında detaylı ön bilgi almak için bizimle iletişime geçmekten çekinmeyin.</p>
+            <a href="<?= BASE_URL ?>iletisim.php" class="btn-primary" style="font-size: 16px; padding: 15px 35px;">Hemen İletişime Geçin</a>
         </div>
     </div>
 </section>

@@ -6,8 +6,15 @@ header('Content-Type: application/json');
 $api_key = "KONYATUPBEBEK_SECRET_API_KEY_2026!";
 
 // Gelen header'ları kontrol et
-$headers = apache_request_headers();
-$auth_header = isset($headers['Authorization']) ? $headers['Authorization'] : '';
+$auth_header = '';
+if (isset($_SERVER['HTTP_AUTHORIZATION'])) {
+    $auth_header = $_SERVER['HTTP_AUTHORIZATION'];
+} elseif (isset($_SERVER['REDIRECT_HTTP_AUTHORIZATION'])) {
+    $auth_header = $_SERVER['REDIRECT_HTTP_AUTHORIZATION'];
+} elseif (function_exists('apache_request_headers')) {
+    $headers = apache_request_headers();
+    $auth_header = isset($headers['Authorization']) ? $headers['Authorization'] : '';
+}
 
 if ($auth_header !== $api_key) {
     http_response_code(401);
@@ -16,8 +23,7 @@ if ($auth_header !== $api_key) {
 }
 
 // Veritabanı bağlantısı
-$db = new PDO('sqlite:../db/konyatupbebek.db');
-$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+require_once '../db.php';
 
 $method = $_SERVER['REQUEST_METHOD'];
 $data = json_decode(file_get_contents('php://input'), true);
